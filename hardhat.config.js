@@ -10,7 +10,7 @@ require("./task/account")
 const { PRIVATE_KEY, GOERLI_RPC_URL, COINMARKETCAP_API_KEY, ETHERSCAN_API_KEY } = process.env || ""
 
 module.exports = {
-  solidity: "0.8.9",
+  solidity: "0.8.13",
   defaultNetwork: "hardhat",
   networks: {
     goerli: {
@@ -21,6 +21,11 @@ module.exports = {
     localhost: {
       url: "http://localhost:8545",
       chainId: 31337,
+    },
+    mumbai: {
+      url: "https://matic-testnet-archive-rpc.bwarelabs.com	",
+      accounts: [PRIVATE_KEY],
+      chainId: 80001,
     },
   },
   etherscan: {

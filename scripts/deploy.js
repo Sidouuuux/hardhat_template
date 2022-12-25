@@ -1,5 +1,5 @@
 
-async function main(contractName, contractAddress, contractArgs = []) {
+async function main(contractName, contractAddress = "0", contractArgs = []) {
   let contractFactory
   let contract
 
@@ -17,13 +17,12 @@ async function main(contractName, contractAddress, contractArgs = []) {
     contract = await contractFactory.attach(contractAddress);
   }
 
-  if (network.config.chainId === 5 && process.env.ETHERSCAN_API_KEY) {
-    if (contractAddress == "0"){
-      console.log("⌛ Waiting for the contract to be propagated...\n");
+  if (contractAddress == "0") {
+    console.log("⌛ Waiting for the contract to be propagated...\n");
 
-      await contract.deployTransaction.wait(6)}
-    await verify(contract.address, contractArgs)
+    await contract.deployTransaction.wait(6)
   }
+  await verify(contract.address, contractArgs)
   console.log("*-------------*\n| ✨ All done |\n*-------------*\n");
 }
 
@@ -43,7 +42,7 @@ async function verify(contractAddress, args) {
   }
 }
 
-main("Lock", "0x381CB3C80Ec649dD6d5930e75e079CCa142e6e41")
+main("rockPaperScissors")
   .then(() => process.exit(0))
   .catch((error) => {
     console.error(error)
